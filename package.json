@@ -1,5 +1,5 @@
 {
-  "name": "Express Boilerplate",
+  "name": "express-boilerplate",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -7,12 +7,14 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "compile:css": "stylus styl/style.styl -o public/css/style.css",
-    "minify:css": "minify public/css/style.css",
-    "compile:js": "browserify scripts/app.js -t babelify --outfile public/js/app.js",
-    "minify:js": "minify public/js/app.js",
-    "build:css": "npm run compile:css && npm run minify:css",
-    "build:js": "npm run compile:js && npm run minify:js",
+    
+    "stylus": "stylus styl/style.styl -o public/css/style.css",
+    "cleancss": "cleancss -o public/css/style.min.css public/css/style.css",
+    "browserify:babelify": "browserify scripts/app.js -t babelify --outfile public/js/app.js",
+    "uglifyjs": "uglifyjs public/js/app.js -m -c -o public/js/app.min.js",
+    
+    "build:css": "npm run stylus && npm run cleancss",
+    "build:js": "npm run browserify:babelify && npm run uglifyjs",
     "build": "npm run build:css & npm run build:js"
   },
   "keywords": [],
@@ -27,8 +29,10 @@
     "babel-preset-env": "^1.6.1",
     "babelify": "^8.0.0",
     "browserify": "^14.5.0",
-    "minifier": "^0.8.1",
+    "clean-css": "^4.1.9",
+    "clean-css-cli": "^4.1.10",
     "nodemon": "^1.14.7",
-    "stylus": "^0.54.5"
+    "stylus": "^0.54.5",
+    "uglify-js": "^3.3.4"
   }
 }

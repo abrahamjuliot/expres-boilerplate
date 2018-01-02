@@ -9,7 +9,7 @@ console.log(test());
 'use strict';
 
 var test = function test() {
-  return 'sad yo';
+  return 'sorta cool way too tired';
 };
 
 module.exports = test;
