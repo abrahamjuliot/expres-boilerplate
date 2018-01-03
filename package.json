@@ -6,16 +6,24 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "dev": "nodemon server.js",
-    
+    "serve": "nodemon -e js,pug,css --delay 3.5 server.js",
     "stylus": "stylus styl/style.styl -o public/css/style.css",
+    "poststylus": "tput setaf 6; echo '[stylus] done...'",
     "cleancss": "cleancss -o public/css/style.min.css public/css/style.css",
+    "postcleancss": "tput setaf 6; echo '[cleancss] done...'",
     "browserify:babelify": "browserify scripts/app.js -t babelify --outfile public/js/app.js",
+    "postbrowserify:babelify": "tput setaf 6; echo '[browserify:babelify] done...'",
     "uglifyjs": "uglifyjs public/js/app.js -m -c -o public/js/app.min.js",
-    
+    "postuglifyjs": "tput setaf 6; echo '[uglifyjs] done...'",
     "build:css": "npm run stylus && npm run cleancss",
     "build:js": "npm run browserify:babelify && npm run uglifyjs",
-    "build": "npm run build:css & npm run build:js"
+    "prebuild": "tput bold; echo 'building...'",
+    "postbuild": "tput setaf 2; echo 'build complete 🔥'",
+    "build": "npm run build:css & npm run build:js",
+    "watch:css": "onchange 'styl/*.styl' -- npm run build:css",
+    "watch:js": "onchange 'scripts/*.js' -- npm run build:js",
+    "watch:all": "npm run serve & npm run watch:css & npm run watch:js",
+    "postinstall": "npm run watch:all -s"
   },
   "keywords": [],
   "author": "Abraham Juliot",
@@ -32,6 +40,7 @@
     "clean-css": "^4.1.9",
     "clean-css-cli": "^4.1.10",
     "nodemon": "^1.14.7",
+    "onchange": "^3.3.0",
     "stylus": "^0.54.5",
     "uglify-js": "^3.3.4"
   }

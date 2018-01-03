@@ -1,3 +1,3 @@
-const test = () => 'sorta cool way too tired'
+const test = () => 'yes cool way not tired'
 
 module.exports = test

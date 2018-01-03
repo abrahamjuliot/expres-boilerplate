@@ -1,3 +1,0 @@
-2 terminals: nodemon | npm run build
-
-not built for watching -- use chrome extensions
